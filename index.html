@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nescafe Game Mod LIST</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        nescafe: {
+                            900: '#1a0f0a', // Sangat gelap, seperti kopi hitam
+                            800: '#2c1810',
+                            600: '#8b4513',
+                            500: '#c25a1a', // Warna aksen neon orange/kopi
+                            400: '#e58035',
+                        },
+                        dark: '#0a0a0a',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'tab-enter': 'tabEnter 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(40px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        tabEnter: {
+                            '0%': { transform: 'translateY(20px) scale(0.98)', opacity: '0' },
+                            '100%': { transform: 'translateY(0) scale(1)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Background & Scrollbar */
+        body {
+            background-color: #050505;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(194, 90, 26, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 69, 19, 0.08), transparent 25%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8b4513;
+            border-radius: 4px;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-panel {
+            background: rgba(20, 15, 10, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(194, 90, 26, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Neon & Glow Effects */
+        .neon-text {
+            text-shadow: 0 0 20px rgba(194, 90, 26, 0.5);
+        }
+        
+        .btn-glow {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            background: linear-gradient(45deg, #c25a1a, #8b4513, #e58035);
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            filter: blur(15px);
+        }
+        
+        .btn-glow:hover::before {
+            opacity: 0.8;
+        }
+
+        .tab-indicator {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Image Masking for Game Banner */
+        .game-banner {
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
+
+    <!-- Ambient Background Elements -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-nescafe-600/20 rounded-full blur-[120px] animate-pulse-slow"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-nescafe-500/10 rounded-full blur-[100px] animate-pulse-slow" style="animation-delay: 2s;"></div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="w-full max-w-5xl mb-12 text-center opacity-0 animate-slide-up">
+        <div class="inline-flex items-center justify-center space-x-3 mb-4">
+            <svg class="w-10 h-10 text-nescafe-500 animate-float" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2,21H20V19H2M20,8H18V5H20M20,3H4V13A4,4 0 0,0 8,17H14A4,4 0 0,0 18,13V10H20A2,2 0 0,0 22,8V5C22,3.89 21.1,3 20,3M16,13A2,2 0 0,1 14,15H8A2,2 0 0,1 6,13V5H16V13Z"/>
+            </svg>
+            <h1 class="font-display text-4xl md:text-5xl font-bold tracking-tight text-white neon-text">
+                NESCAFE <span class="text-nescafe-500">MODS</span>
+            </h1>
+        </div>
+        <p class="text-gray-400 text-lg md:text-xl font-light max-w-2xl mx-auto">
+            Koleksi eksklusif modifikasi game premium. Diseduh khusus untuk pengalaman bermain terbaik Anda.
+        </p>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="w-full max-w-5xl opacity-0 animate-slide-up" style="animation-delay: 0.2s;">
+        
+        <!-- Tab Navigation (Designed for future expansion) -->
+        <nav class="flex overflow-x-auto pb-4 mb-6 hide-scrollbar border-b border-white/10" role="tablist">
+            <div class="flex space-x-2">
+                <!-- Tab 1: Spintires -->
+                <button 
+                    id="tab-btn-spintires" 
+                    onclick="switchTab('spintires')" 
+                    class="relative px-6 py-3 rounded-t-lg font-semibold text-sm transition-all duration-300 text-white bg-nescafe-500/20 shadow-[0_-4px_15px_rgba(194,90,26,0.2)]"
+                    role="tab" 
+                    aria-selected="true"
+                >
+                    Spintires Mudrunner
+                    <!-- Active Indicator -->
+                    <div class="absolute bottom-[-1px] left-0 w-full h-[2px] bg-nescafe-500 tab-indicator"></div>
+                </button>
+
+                <!-- Tab 2: Minecraft -->
+                <button 
+                    id="tab-btn-minecraft" 
+                    onclick="switchTab('minecraft')" 
+                    class="relative px-6 py-3 rounded-t-lg font-semibold text-sm transition-all duration-300 text-gray-500 hover:text-gray-300 hover:bg-white/5"
+                    role="tab" 
+                    aria-selected="false"
+                >
+                    Minecraft
+                    <!-- Active Indicator -->
+                    <div class="absolute bottom-[-1px] left-0 w-0 h-[2px] bg-nescafe-500 tab-indicator transition-all duration-300"></div>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Tab Content Area -->
+        <div class="relative w-full">
+            
+            <!-- Tab 1 Content: Spintires Mudrunner -->
+            <section id="content-spintires" class="tab-content block animate-tab-enter" role="tabpanel">
+                <div class="glass-panel rounded-2xl overflow-hidden flex flex-col md:flex-row border border-white/5 group">
+                    
+                    <!-- Game Banner/Image (Left side on desktop, Top on mobile) -->
+                    <div class="md:w-5/12 h-64 md:h-auto relative overflow-hidden bg-nescafe-900">
+                        <!-- Placeholder Background with Coffee/Mud vibes -->
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518779872583-1463124806db?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')] bg-cover bg-center opacity-40 mix-blend-overlay group-hover:scale-110 group-hover:opacity-50 transition-all duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-nescafe-900 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-nescafe-900/90"></div>
+                        
+                        <!-- Floating Element inside Image -->
+                        <div class="absolute inset-0 flex items-center justify-center flex-col">
+                            <svg class="w-16 h-16 text-nescafe-500 drop-shadow-lg animate-float" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Mod Details & Download (Right side on desktop, Bottom on mobile) -->
+                    <div class="p-8 md:p-10 md:w-7/12 flex flex-col justify-center relative">
+                        <div class="absolute top-0 right-0 p-4 opacity-10">
+                            <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6Z"/></svg>
+                        </div>
+
+                        <div class="inline-flex items-center space-x-2 text-nescafe-500 text-sm font-bold tracking-widest uppercase mb-2">
+                            <span class="w-2 h-2 rounded-full bg-nescafe-500 animate-pulse"></span>
+                            <span>Status: Updated</span>
+                        </div>
+                        
+                        <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Spintires Mudrunner<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-nescafe-400 to-yellow-500">Ultimate Mod Pack</span></h2>
+                        
+                        <p class="text-gray-400 leading-relaxed mb-8">
+                            Tingkatkan pengalaman off-road Anda dengan koleksi mod terbaik untuk Spintires Mudrunner. Termasuk kendaraan kustom, map realistis, tekstur lumpur HD, dan peningkatan fisika yang membuat game terasa lebih hidup.
+                        </p>
+
+                        <!-- Download Button -->
+                        <div class="mt-auto">
+                            <a href="https://gofile.io/d/rfpS7uhZ" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-nescafe-600 to-nescafe-500 text-white font-bold rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(194,90,26,0.7)] btn-glow">
+                                <!-- Hover Sweep Effect -->
+                                <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
+                                
+                                <svg class="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                <span class="relative text-lg tracking-wide">DOWNLOAD MOD</span>
+                            </a>
+                            <p class="text-xs text-gray-500 mt-4 flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                Link aman via Gofile.io (No Ads)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 2 Content: Minecraft -->
+            <section id="content-minecraft" class="tab-content hidden" role="tabpanel">
+                <div class="glass-panel rounded-2xl overflow-hidden flex flex-col md:flex-row border border-white/5 group">
+                    
+                    <!-- Game Banner/Image (Left side on desktop, Top on mobile) -->
+                    <div class="md:w-5/12 h-64 md:h-auto relative overflow-hidden bg-nescafe-900">
+                        <!-- Placeholder Background with Minecraft vibes -->
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1607513746994-51f730a44832?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')] bg-cover bg-center opacity-40 mix-blend-overlay group-hover:scale-110 group-hover:opacity-50 transition-all duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-nescafe-900 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-nescafe-900/90"></div>
+                        
+                        <!-- Floating Element inside Image -->
+                        <div class="absolute inset-0 flex items-center justify-center flex-col">
+                            <svg class="w-16 h-16 text-nescafe-500 drop-shadow-lg animate-float" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Mod Details & Download -->
+                    <div class="p-8 md:p-10 md:w-7/12 flex flex-col justify-center relative">
+                        <div class="absolute top-0 right-0 p-4 opacity-10">
+                            <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24"><path d="M4,2H20A2,2 0 0,1 22,4V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2M4,4V20H20V4H4M6,6H18V18H6V6M8,8V16H16V8H8Z"/></svg>
+                        </div>
+
+                        <div class="inline-flex items-center space-x-2 text-nescafe-500 text-sm font-bold tracking-widest uppercase mb-2">
+                            <span class="w-2 h-2 rounded-full bg-nescafe-500 animate-pulse"></span>
+                            <span>Status: Verified</span>
+                        </div>
+                        
+                        <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Minecraft<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-nescafe-400 to-yellow-500">Shaders & Texture Pack</span></h2>
+                        
+                        <p class="text-gray-400 leading-relaxed mb-8">
+                            Ubah dunia kotak-kotak Anda menjadi mahakarya visual. Mod pack ini mencakup shader realistis kelas atas, pencahayaan dinamis, bayangan halus, dan tekstur beresolusi tinggi untuk memanjakan mata Anda.
+                        </p>
+
+                        <!-- Download Button -->
+                        <div class="mt-auto">
+                            <a href="https://gofile.io/d/Upmau4HL" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-nescafe-600 to-nescafe-500 text-white font-bold rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(194,90,26,0.7)] btn-glow">
+                                <!-- Hover Sweep Effect -->
+                                <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
+                                
+                                <svg class="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                <span class="relative text-lg tracking-wide">DOWNLOAD MOD</span>
+                            </a>
+                            <p class="text-xs text-gray-500 mt-4 flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                Link aman via Gofile.io (No Ads)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto pt-16 pb-6 w-full max-w-5xl text-center opacity-0 animate-slide-up" style="animation-delay: 0.4s;">
+        <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-6"></div>
+        <p class="text-gray-600 text-sm">
+            &copy; 2024 Nescafe Game Mod LIST. Designed with passion.
+        </p>
+    </footer>
+
+    <!-- Scripts for Tab Functionality and Animations -->
+    <script>
+        // Animasi Shimmer khusus untuk tombol hover
+        tailwind.config.theme.extend.keyframes.shimmer = {
+            '100%': { transform: 'translateX(100%)' }
+        };
+
+        // Fungsi logic untuk mengganti tab (Berguna untuk nanti jika ditambah tab baru)
+        function switchTab(tabId) {
+            // 1. Ambil semua tombol tab & konten tab
+            const tabButtons = document.querySelectorAll('button[role="tab"]');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            // 2. Sembunyikan semua konten dan nonaktifkan tombol
+            tabContents.forEach(content => {
+                content.classList.add('hidden');
+                content.classList.remove('animate-tab-enter'); // Hapus kelas animasi
+            });
+
+            tabButtons.forEach(btn => {
+                btn.setAttribute('aria-selected', 'false');
+                btn.classList.remove('text-white', 'bg-nescafe-500/20', 'shadow-[0_-4px_15px_rgba(194,90,26,0.2)]');
+                btn.classList.add('text-gray-500', 'hover:text-gray-300', 'hover:bg-white/5');
+                
+                // Perkecil indikator bawah
+                const indicator = btn.querySelector('.tab-indicator');
+                if(indicator) indicator.style.width = '0';
+            });
+
+            // 3. Tampilkan konten yang dipilih dan aktifkan tombolnya
+            const selectedContent = document.getElementById('content-' + tabId);
+            const selectedBtn = document.getElementById('tab-btn-' + tabId);
+
+            if (selectedContent && selectedBtn) {
+                selectedContent.classList.remove('hidden');
+                // Paksa reflow browser agar animasi bisa dijalankan ulang
+                void selectedContent.offsetWidth; 
+                selectedContent.classList.add('animate-tab-enter');
+
+                selectedBtn.setAttribute('aria-selected', 'true');
+                selectedBtn.classList.remove('text-gray-500', 'hover:text-gray-300', 'hover:bg-white/5');
+                selectedBtn.classList.add('text-white', 'bg-nescafe-500/20', 'shadow-[0_-4px_15px_rgba(194,90,26,0.2)]');
+                
+                // Perbesar indikator bawah
+                const indicator = selectedBtn.querySelector('.tab-indicator');
+                if(indicator) indicator.style.width = '100%';
+            }
+        }
+    </script>
+</body>
+</html>
